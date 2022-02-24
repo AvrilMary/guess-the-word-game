@@ -10,16 +10,15 @@ const playAgainButton= document.querySelector(".play-again");
 
 
 // This word is used to test out the game
-const word = "book";
+const word = "magnolia";
 const guessedLetters = [];
 
 //Function to represent each letter with circle symbols
 const placeHolders = function (word) {
     const wordArray = word.split("");
-    //Now I have and array [w, o, r, d]
+    //Now I have an array [w, o, r, d]
     const modifyArray = wordArray.map(function (item) {
-        item = wordInProgress;
-        return wordInProgress.innerText = "●";
+        return item = "●";
     });
         wordInProgress.innerText= modifyArray.join("")
     };
@@ -52,15 +51,50 @@ const checkPlayerInput = function (input) {
     }
 };
 
+// Function to turn guess into uppercase and check if player has already guessed letter.  
 const makeGuess = function (letter) {
     const uppercaseLetter = letter.toUpperCase();
-    if (guessedLetters.includes(letter)) {
+    if (guessedLetters.includes(uppercaseLetter)) {
         message.innerText = "You already guessed that letter! Try a different letter";
     } else {
-        guessedLetters.push(letter);
+        guessedLetters.push(uppercaseLetter);
+        showGuessedLetters(uppercaseLetter);
     }
     console.log(guessedLetters)
+    updateWord(guessedLetters);
+};
+
+// Function to show guessed letters
+const showGuessedLetters =  function (letter) {
+    guessLetters.innerHTML = "";
+    let newLetter = document.createElement("li");
+    newLetter.innerText = letter;
+    guessLetters.append(newLetter);
 };
 
 
+//This is a function to update the word in progress
+const updateWord = function (guessedLetters) {
+    const wordUpper = word.toUpperCase();
+    // Taking our now uppercase word, spliting so it can be an array
+    const wordArray = wordUpper.split("");
+    //console.log(wordArray);
+    const letterMatches = [];
+    for (const letter of wordArray) {
+        if (guessedLetters.includes(letter)) {
+            letterMatches.push(letter.toUpperCase());
+        } else {
+            letterMatches.push("●");
+    }
+    wordInProgress.innerText = letterMatches.join("");
+    }
+    checkWin();
+};
 
+//Function to check if the player won. 
+const checkWin = function () {
+    if (wordInProgress.innerText === word.toUpperCase()) {
+        message.classList.add("win");
+        message.innerHTML = `<p class="highlight">You guessed the correct word! Congrats!</p>`
+    }
+};
