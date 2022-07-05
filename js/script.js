@@ -20,7 +20,11 @@ const playAgainButton= document.querySelector(".play-again");
 
 // Global variables
 let word = "magnolia";
+
+// Guess letters global variable
 let guessedLetters = [];
+
+// Global variable for number of guesses
 let remainingGuesses = 8;
 
 const getWord = async function () {
@@ -30,26 +34,21 @@ const getWord = async function () {
     const wordArray = words.split("\n");
     console.log(wordArray);
     const randomIndex = Math.floor(Math.random() * wordArray.length);
-    //console.log(randomIndex);
     word = wordArray[randomIndex].trim();
-    //console.log(word);
+    const placeHolders = function (word) {
+        const wordArray = word.split("");
+        const modifyArray = wordArray.map(function (item) {
+            return item = "●";
+        });
+            wordInProgress.innerText= modifyArray.join("")
+        };
     placeHolders(word);
 };
 
 
-//Function to represent each letter with circle symbols
-const placeHolders = function (word) {
-    const wordArray = word.split("");
-    //Now I have an array [w, o, r, d]
-    const modifyArray = wordArray.map(function (item) {
-        return item = "●";
-    });
-        wordInProgress.innerText= modifyArray.join("")
-    };
-
     getWord();
 
-//Function to capture player guesses
+// Event Listener to capture player guesses
 button.addEventListener("click", function (e) {
     e.preventDefault();
     const input = playerInput.value;  
@@ -65,11 +64,11 @@ button.addEventListener("click", function (e) {
 const checkPlayerInput = function (input) {
     const acceptedLetter = /[a-zA-z]/
     if (input === "") {
-        message.innerText = "Remember to include a letter silly!";
+        message.innerText = "Remember to include a letter!";
     } else if (input.length >= 2) {
-        message.innerText = "Just one letter at a time please!";
+        message.innerText = "Remember to include just one letter at a time";
     } else if (!input.match(acceptedLetter))  { 
-         message.innerText = "Remember to use letters!";
+         message.innerText = "Remember to include letters";
     } else {
         return input;
     }
@@ -82,7 +81,7 @@ const makeGuess = function (validatedLetter) {
         message.innerText = "You already guessed that letter! Try a different letter";
     } else {
         guessedLetters.push(validatedLetter);
-        showGuessedLetters(validatedLetter);
+        showGuessedLetters(guessedLetters);
         console.log(guessedLetters)
         countGuesses(validatedLetter);
         updateWord(guessedLetters);
@@ -90,23 +89,22 @@ const makeGuess = function (validatedLetter) {
 };
 
 // Function to show guessed letters
-const showGuessedLetters =  function () {
+const showGuessedLetters =  function (guessedLettersArray) {
     guessLetters.innerHTML = "";
-    for (const letter of guessedLetters) {
-        const li = document.createElement("li");
-        li.innerHTML = letter;
+    for (let letter of guessedLettersArray) {
+        let li = document.createElement("li");
+        li.innerText = letter;
         guessLetters.append(li);
     }
 };
 
 
-//This is a function to update the word in progress
+// Function to update the word in progress
 const updateWord = function (guessedLetters) {
     const wordUpper = word.toUpperCase();
-    // Taking our now uppercase word, spliting so it can be an array
     const wordArray = wordUpper.split("");
     const letterMatches = [];
-    for (const letter of wordArray) {
+    for (let letter of wordArray) {
         if (guessedLetters.includes(letter)) {
             letterMatches.push(letter.toUpperCase());
         } else {
@@ -130,8 +128,7 @@ const countGuesses = function (guess) {
         };
 
         if (remainingGuesses === 0) {
-        message.innerText = "Sorry friend. Game is over";
-        wordInProgress.innerText = `The word was ${word}.`;
+        message.innerText = `Game over. The word was ${word}`;
         spanremaining.innerText = `${remainingGuesses}`;
         startOver();
     } else if (remainingGuesses === 1) {
