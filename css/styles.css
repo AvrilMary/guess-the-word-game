@@ -34,14 +34,14 @@ h1 {
 }
 
 .container {
- background: radial-gradient(ellipse at top, #e66465, transparent),
-            radial-gradient(ellipse at bottom, #4d9f0c, transparent);
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  width: 90%;
-  padding: 25px;
+    background: radial-gradient(50% 50% at 50% 50%,
+      rgba(167, 237, 237, 0.3) 0%,
+      rgba(156, 226, 226, 0) 100%);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
 }
 
 .hide {
