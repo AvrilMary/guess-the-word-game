@@ -6,13 +6,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0;
+  margin: 10;
   font-family: "Open Sans", sans-serif;
   font-style: normal;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 150%;
   background-image: url("../img/bg.png");
-  background-size: 800px;
+  background-size: 850px;
   background-repeat: repeat;
   color: #305050;
 }
@@ -29,7 +29,7 @@ h1 {
   font-family: "Unlock", sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 44px;
+  font-size: 40px;
   text-align: center;
 }
 
@@ -60,8 +60,8 @@ h1 {
 }
 
 .word-in-progress {
-  letter-spacing: 15px;
-  color: #28bdbd;
+  letter-spacing: 12px;
+  color: #813591;
   font-size: 30px;
 }
 
