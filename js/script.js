@@ -30,9 +30,7 @@ let remainingGuesses = 8;
 const getWord = async function () {
     const res = await fetch ("https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt");
     const words = await res.text();
-    console.log(words);
     const wordArray = words.split("\n");
-    console.log(wordArray);
     const randomIndex = Math.floor(Math.random() * wordArray.length);
     word = wordArray[randomIndex].trim();
     const placeHolders = function (word) {
@@ -55,7 +53,6 @@ button.addEventListener("click", function (e) {
     playerInput.value = "";
     message.innerText = "";
     const validatedLetter = checkPlayerInput(input);
-    console.log(validatedLetter);
     makeGuess(validatedLetter);
 }); 
 
@@ -82,7 +79,6 @@ const makeGuess = function (validatedLetter) {
     } else {
         guessedLetters.push(validatedLetter);
         showGuessedLetters(guessedLetters);
-        console.log(guessedLetters)
         countGuesses(validatedLetter);
         updateWord(guessedLetters);
     }
