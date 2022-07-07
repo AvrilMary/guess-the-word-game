@@ -1,4 +1,4 @@
-//Declaration of global variables to target HTML
+//Declaration of global variables.
 
 // Unordered list where players guessed letters will appear
 const guessLetters   = document.querySelector(".guessed-letters");
@@ -11,7 +11,7 @@ const wordInProgress = document.querySelector(".word-in-progress");
 // Paragraph where the remaining guesses will display
 const remaining      = document.querySelector(".remaining");
 // Span inside the paragraph where the remaining guesses will display.
-const spanremaining  = document.querySelector(".remaining span") //Check if I am targeting the span part correctly.
+const spanremaining  = document.querySelector(".remaining span") 
 // Messages will appear here when the player guesses a letter.
 const message        = document.querySelector(".message");
 // The hidden button that appears so player can play again.
@@ -30,9 +30,7 @@ let remainingGuesses = 8;
 const getWord = async function () {
     const res = await fetch ("https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt");
     const words = await res.text();
-    console.log(words);
     const wordArray = words.split("\n");
-    console.log(wordArray);
     const randomIndex = Math.floor(Math.random() * wordArray.length);
     word = wordArray[randomIndex].trim();
     const placeHolders = function (word) {
@@ -45,7 +43,6 @@ const getWord = async function () {
     placeHolders(word);
 };
 
-
     getWord();
 
 // Event Listener to capture player guesses
@@ -55,7 +52,6 @@ button.addEventListener("click", function (e) {
     playerInput.value = "";
     message.innerText = "";
     const validatedLetter = checkPlayerInput(input);
-    console.log(validatedLetter);
     makeGuess(validatedLetter);
 }); 
 
@@ -126,7 +122,6 @@ const countGuesses = function (guess) {
         } else { 
             message.innerText = "Well done, your guess was correct!"; 
         };
-
         if (remainingGuesses === 0) {
         message.innerText = `Game over. The word was ${word}`;
         spanremaining.innerText = `${remainingGuesses}`;
