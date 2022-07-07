@@ -1,4 +1,4 @@
-//Declaration of global variables to target HTML
+//Declaration of global variables.
 
 // Unordered list where players guessed letters will appear
 const guessLetters   = document.querySelector(".guessed-letters");
@@ -11,7 +11,7 @@ const wordInProgress = document.querySelector(".word-in-progress");
 // Paragraph where the remaining guesses will display
 const remaining      = document.querySelector(".remaining");
 // Span inside the paragraph where the remaining guesses will display.
-const spanremaining  = document.querySelector(".remaining span") //Check if I am targeting the span part correctly.
+const spanremaining  = document.querySelector(".remaining span") 
 // Messages will appear here when the player guesses a letter.
 const message        = document.querySelector(".message");
 // The hidden button that appears so player can play again.
@@ -42,7 +42,6 @@ const getWord = async function () {
         };
     placeHolders(word);
 };
-
 
     getWord();
 
@@ -122,7 +121,6 @@ const countGuesses = function (guess) {
         } else { 
             message.innerText = "Well done, your guess was correct!"; 
         };
-
         if (remainingGuesses === 0) {
         message.innerText = `Game over. The word was ${word}`;
         spanremaining.innerText = `${remainingGuesses}`;
