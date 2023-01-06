@@ -34,33 +34,14 @@ const addPlaceholders = function (word) {
     });
 
    wordInProgress.innerText = newArray.join("");
+   console.log(wordInProgress);
 } 
-
-const validatePlayerInput = function (input) {
-    const acceptedLetter = /[a-zA-z]/;
-    if (input === "" ) {
-        message.innerText = "Where is your letter??";
-    } else if (input.length >= 2) {
-      message.innerText = "You added more than one letter! Just include 1!";
-    } else if (input.match(acceptedLetter)) {
-       message.innerText = "Thats not a letter!";
-    } else {
-        message.innerText = "That's it! You added a letter";
-        return input;
-    }
-};
-
 
 addPlaceholders(word);
 
-guessButton.addEventListener("change", function (e) {
-   console.log(e);
-   /* e.preventDefault();
-    const input = e.target.value;
-    console.log(input);
-    input.innerHTML = "";
-    message.innerText = "";
-   */
-  validatePlayerInput(input);
-})
-
+guessButton.addEventListener("click", function (e) {
+    e.preventDefault();
+   const userInput = guessInput.value;
+    console.log(userInput);
+    guessInput.value = "";
+ });
