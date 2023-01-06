@@ -18,6 +18,7 @@ const message = document.querySelector(".message");
 const hideButton = document.querySelector(".play-again");
 
 const word = "magnolia";
+const guessedLetterArray = [];
 
 // ------------------------------------------ //
 
@@ -44,4 +45,24 @@ guessButton.addEventListener("click", function (e) {
    const userInput = guessInput.value;
     console.log(userInput);
     guessInput.value = "";
+    message.innerText = "";
+    validatePlayerInput(userInput);
  });
+
+ const validatePlayerInput = function (input) {
+    const acceptedLetter = /[a-zA-Z]/;
+    if (input === "") {
+        message.innerText = "You didnt enter a letter";
+    } else if (input.length >1) {
+        message.innerText = "Remember to add just one letter";
+    } else if (!input.match(acceptedLetter)) {
+        message.innerText = "That isnt a letter";
+    } else {
+        // message.innerText = "That input is accepted";
+        return input;
+    }
+ }
+
+ const makeGuess = function (letter) {
+    
+ }
