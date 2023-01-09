@@ -58,11 +58,63 @@ guessButton.addEventListener("click", function (e) {
     } else if (!input.match(acceptedLetter)) {
         message.innerText = "That isnt a letter";
     } else {
-        // message.innerText = "That input is accepted";
-        return input;
+        return makeGuess(input);
+
     }
  }
 
  const makeGuess = function (letter) {
-    
+    const uppercaseLetter = letter.toUpperCase();
+    if (guessedLetterArray.includes(uppercaseLetter)) {
+        message.innerText = "You already guessed that letter";
+    } else {
+        guessedLetterArray.push(uppercaseLetter);
+        playerGuesses(guessedLetterArray);
+        updateWordInProgress(guessedLetterArray);
+    }
  }
+
+ const playerGuesses = function (guessedLetterArray) {
+    guessedLetters.innerHTML = "";
+    guessedLetterArray.forEach(function(letter) {
+        const li = document.createElement("li");
+        li.innerText = letter;
+        guessedLetters.append(li);
+    })
+ }
+
+ const updateWordInProgress = function (guessedLettersArray) {
+    const wordUpper = word.toUpperCase();
+    //This splits my word into an array 
+    const wordArray = wordUpper.split("");
+    const newArray = []
+    // I need to check my word array [M,A,G,N,O,L,I,A] contains any letters
+    for (let letter of wordArray) {
+        if (guessedLetterArray.includes(letter)) {
+            newArray.push(letter.toUpperCase());
+        } else {
+            newArray.push("●")
+        }
+    }
+    wordInProgress.innerText = newArray.join("");
+    playerWin(wordUpper);
+        
+};
+
+/*const playerWin = function () {
+    if (wordInProgress.match(word)) {
+        message.classList.add("win");
+        message.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
+    }
+};
+*/
+
+
+
+const playerWin = function (wordUpper) {
+    if (wordInProgress.innerText === wordUpper) {
+        message.classList.add("win");
+        message.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
+    }
+};
+ 
