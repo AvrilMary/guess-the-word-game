@@ -16,9 +16,12 @@ const span = document.querySelector("span");
 const message = document.querySelector(".message");
 // <-- Hidden button to encourage another game -->
 const hideButton = document.querySelector(".play-again");
+// <-- Remaining Guesses message -->
+const remainingGuessesMessage = document.querySelector(".remaining")
 
 const word = "magnolia";
 const guessedLetterArray = [];
+let remainingGuesses = 8;
 
 // ------------------------------------------ //
 
@@ -71,6 +74,7 @@ guessButton.addEventListener("click", function (e) {
         guessedLetterArray.push(uppercaseLetter);
         playerGuesses(guessedLetterArray);
         updateWordInProgress(guessedLetterArray);
+        countRemainingGuesses(uppercaseLetter);
     }
  }
 
@@ -101,14 +105,28 @@ guessButton.addEventListener("click", function (e) {
         
 };
 
-/*const playerWin = function () {
-    if (wordInProgress.match(word)) {
-        message.classList.add("win");
-        message.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
+const countRemainingGuesses = function (guess) {
+    const upperCaseWord = word.toUpperCase();
+    if (!upperCaseWord.includes(guess)) {
+        message.innerText = "The word doesnt include that letter";
+        remainingGuesses -= 1;
+        console.log(remainingGuesses);
+    } else {
+        message.innerText = `Good guess! The word has the letter ${guess} `;
+    };
+    if (remainingGuesses === 0) {
+        message.innerText = "The game is over";
+        hideButton.classList.remove("hide");
+        guessButton.classList.add("hide");
+        remainingGuessesMessage.classList.add("hide");
+        guessedLetters.classList.add("hide");
+        guessInput.classList.add("hide");
+    } else {
+        span.innerText = `${remainingGuesses}`
     }
-};
-*/
 
+}
+ 
 
 
 const playerWin = function (wordUpper) {
@@ -117,4 +135,5 @@ const playerWin = function (wordUpper) {
         message.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
     }
 };
+
  
