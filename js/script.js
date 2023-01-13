@@ -109,7 +109,6 @@ guessButton.addEventListener("click", function (e) {
     //This splits my word into an array 
     const wordArray = wordUpper.split("");
     const newArray = []
-    // I need to check my word array [M,A,G,N,O,L,I,A] contains any letters
     for (let letter of wordArray) {
         if (guessedLetterArray.includes(letter)) {
             newArray.push(letter.toUpperCase());
@@ -160,17 +159,19 @@ const startOver = function () {
 }
 
 playAgainButton.addEventListener("click", function () {
+  //Reset original values
     message.classList.remove("win");
     message.innerText = "";
     guessedLetters.innerText = "";
     addPlaceholders(word);
+    getWord();
     remainingGuesses = 8;
     span.innerText = `${remainingGuesses}`;
     guessedLetterArray = [];
-    guessButton.classList.remove("hide");
     playAgainButton.classList.add("hide");
     remainingGuessesMessage.classList.remove("hide");
     guessInput.classList.remove("hide");
+    guessButton.classList.remove("hide");
 })
 
  
